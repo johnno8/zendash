@@ -1,0 +1,70 @@
+{{> menu}}
+
+<section class="ui raised segment">
+  <div class="ui grid">
+    <div class="ui three wide column">
+      <div class="ui padded basic segment">
+        <form>
+          <button class="ui right floated blue button" formaction="/getTickets">Back to Tickets</button>
+        </form>
+      </div>
+    </div>
+    <div class="ui ten wide column fluid form">
+      <table class="ui definition table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="ui blue header">Ticket {{ tickets.0.id }} </th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each tickets}}
+          <tr>
+            <td><strong>id</strong></td>
+            <td>{{ id }}</td>
+          </tr>
+          <tr>
+            <td><strong>Instigator</strong></td>
+            <td>{{ instigator }}</td>
+          </tr>
+          <tr>
+            <td><strong>Date created</strong></td>
+            <td>{{ created_day }}-{{ created_month }}-{{ created_year }}</td>
+          </tr>
+          <tr>
+            <td><strong>Subject</strong></td>
+            <td>{{ subject }}</td>
+          </tr>
+          <tr>
+            <td><strong>Description</strong></td>
+            <td>{{ description }}</td>
+          </tr>
+          <tr>
+            <td><strong>Status</strong></td>
+            <td>{{ status }}</td>
+          </tr>
+          <tr>
+            <td><strong>Replies</strong></td>
+            <td>{{ replies }}</td>
+          </tr>
+          <tr>
+            <td><strong>Solved at</strong></td>
+            <td>{{ solved_at }}</td>
+          </tr>
+          <tr>
+            <td><strong>First reply (minutes)</strong></td>
+            <td>{{ reply_time_absolute }}</td>
+          </tr>
+          <tr>
+            <td><strong>Full resolution (minutes)</strong></td>
+            <td>{{ full_res_time_absolute }}</td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+      <form>
+        <button class="ui right floated blue button" formaction="/getTickets">Back to Tickets</button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+version: '2'
+services:
+  web:
+    build: .
+    volumes:
+      - .:/zendesk_metrics_extractor
+    ports:
+      - "4000:4000"
+    env_file: .env
+    environment:
+      ZEN_HOST: 0.0.0.0
+      PG_HOST: postgres
+
+    links:
+      - postgres
+
+  postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres

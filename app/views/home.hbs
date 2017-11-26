@@ -1,0 +1,108 @@
+{{> menu }}
+
+<section class="ui raised segment">
+  <div class="ui grid">
+    <div class="ui four wide column">
+      <img src="images/nf1.jpg" class="ui centered medium image">
+    </div>
+    <div class="ui eight wide column">
+      <div class="ui basic padded segment">
+        <h1 class="ui blue header">Zendesk metrics {{ month }} {{ year }}</h1>
+      </div>
+    </div>
+    <div class="ui four wide column">
+      <div class="ui basic padded segment">
+        <form action="/update" method="GET">
+          <button class="ui fluid blue basic submit button">Update ticket data</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {{{ displayMetrics data month year }}}
+
+
+  <div class="ui grid">
+    <div class="ui two wide column">
+    </div>
+    <div class="ui six wide column">
+      <form class="ui fluid form segment showmonth" action="/showmonth" method="POST">
+        <div class="two fields">
+          <div class="field">
+            <label>Month</label>
+            <div class="ui fluid selection dropdown selectmonth">
+              <input type="hidden" name="month">
+              <i class="dropdown icon"></i>
+              <div class="default text">Select a month</div>
+              <div class="menu">
+                <div class="item" data-value="1">January</div>
+                <div class="item" data-value="2">February</div>
+                <div class="item" data-value="3">March</div>
+                <div class="item" data-value="4">April</div>
+                <div class="item" data-value="5">May</div>
+                <div class="item" data-value="6">June</div>
+                <div class="item" data-value="7">July</div>
+                <div class="item" data-value="8">August</div>
+                <div class="item" data-value="9">September</div>
+                <div class="item" data-value="10">October</div>
+                <div class="item" data-value="11">November</div>
+                <div class="item" data-value="12">December</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Year</label>
+            <div class="ui fluid selection dropdown selectyear">
+              <input type="hidden" name="year">
+              <i class="dropdown icon"></i>
+              <div class="default text">Select a year</div>
+              <div class="menu">
+                <div class="item" data-value="2016">2016</div>
+                <div class="item" data-value="2017">2017</div>
+                <div class="item" data-value="2018">2018</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form actions">
+          <button class="ui fluid blue submit button">Show metrics for chosen month</button>
+          <div class="ui error message"></div>
+        </div>
+      </form>
+    </div>
+    <div class="ui six wide column">
+      <div class="ui padded basic segment">
+        <form action="/getMetrics" method="GET">
+          <button class="ui fluid blue submit button">Show All Metrics</button>
+        </form>
+        <br>
+        <form action="/getTickets" method="GET">
+          <button class="ui fluid blue submit button">Show Zendesk Tickets</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>$('.ui.selection.dropdown.selectmonth').dropdown('clear')</script>
+<script>$('.ui.selection.dropdown.selectyear').dropdown('clear')</script>
+<script>
+  $('.ui.form.showmonth').form({
+    fields: {
+      month: {
+        identifier: 'month',
+        rules: [{
+          type: 'empty',
+          prompt: 'Please select a month',
+        },],
+      },
+      year: {
+        identifier: 'year',
+        rules: [{
+          type: 'empty',
+          prompt: 'Please select a year',
+        },],
+      },
+    },
+  })
+</script>

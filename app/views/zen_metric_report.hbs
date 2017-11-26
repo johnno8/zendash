@@ -1,0 +1,96 @@
+{{> menu}}
+
+<section class="ui raised segment">
+  <div class="ui grid">
+    <div class="ui four wide column">
+      <img src="images/nf1.jpg" class="ui centered medium image">
+    </div>
+    <div class="ui eleven wide column fluid form">
+      <table class="ui celled blue table segment">
+        <thead>
+        <tr>
+          <th> Year</th>
+          <th> Month</th>
+          <th> Number Tickets</th>
+          <th> Avg Reply Time (mins)</th>
+          <th> Avg Resolution Time (mins)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each metrics}}
+          <tr>
+            <td> {{ year }} </td>
+            <td> {{ month }} </td>
+            <td> {{ numTickets }} </td>
+            <td> {{ avgReply }} </td>
+            <td> {{ avgRes }} </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+      <div class="ui padded basic segment">
+        <canvas id="graph1"></canvas>
+        <div class="ui padded basic segment">
+          <h4 class="ui center aligned header">Number of tickets by month</h4>
+        </div>
+      </div>
+      <div class="ui padded basic segment">
+        <canvas id="graph2"></canvas>
+        <div class="ui padded basic segment">
+          <h4 class="ui center aligned header">Average reply time by month</h4>
+        </div>
+      </div>
+      <div class="ui padded basic segment">
+        <canvas id="graph3"></canvas>
+        <div class="ui padded basic segment">
+          <h4 class="ui center aligned header">Average resolution time by month</h4>
+        </div>
+      </div>
+      <div class="ui padded basic segment">
+        <a href="#top"><button class="ui right floated blue button">Top</button></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const ctx = document.getElementById('graph1').getContext('2d')
+
+  const graph1 = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [ {{{ monthList }}} ],
+      datasets: [{
+        label: 'Number of tickets',
+        data: [ {{ graph1Data }} ],
+        backgroundColor: "#2ecc71"
+      }]
+    }
+  })
+
+  const ctx2 = document.getElementById('graph2').getContext('2d')
+  const graph2 = new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: [ {{{ monthList }}} ],
+      datasets: [{
+        label: 'Average reply',
+        data: [ {{ graph2Data }} ],
+        backgroundColor: "#f1c40f"
+      }]
+    }
+  })
+
+  const ctx3 = document.getElementById('graph3').getContext('2d')
+  const graph3 = new Chart(ctx3, {
+    type: 'line',
+    data: {
+      labels: [ {{{ monthList }}} ],
+      datasets: [{
+        label: 'Average resolution',
+        data: [ {{ graph3Data }} ],
+        backgroundColor: "#95a5a6"
+      }]
+    }
+  })
+</script>
